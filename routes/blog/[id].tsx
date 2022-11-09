@@ -7,7 +7,7 @@ export const handler: Handlers<Post> = {
     const id: string = ctx.params.id;
     const post = await load(id);
 
-    if(!post) return new Response("Post not found", {status: 404});
+    if (!post) return new Response("Post not found", { status: 404 });
 
     return ctx.render(post);
   },
@@ -19,7 +19,7 @@ export default function PostPage(props: PageProps<Post>) {
   return (
     <>
       <Head>
-        <title>Ma Fresh App</title>
+        <title>{post.title}</title>
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
         <p class="mt-12">{post.publishedAt.toLocaleDateString()}</p>
