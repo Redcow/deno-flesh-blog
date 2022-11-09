@@ -1,15 +1,21 @@
 import { Head } from "$fresh/runtime.ts";
-import { Post } from "../../utils/Post.ts";
+import { load, Post } from "../../utils/Post.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 
-const post: Post = {
-  id: "hello",
-  title: "Hello World",
-  publishedAt: new Date(),
-  snippet: "test",
-  content: "le contenu"
-}
+export const handler: Handlers<Post> = {
+  async GET(req, ctx) {
+    const id: string = ctx.params.id;
+    const post = await load(id);
 
-export default function PostPage() {
+    if(!post) return new Response("Post not found", {status: 404});
+
+    return ctx.render(post);
+  },
+};
+
+export default function PostPage(props: PageProps<Post>) {
+  const post = props.data;
+
   return (
     <>
       <Head>
@@ -17,7 +23,7 @@ export default function PostPage() {
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
         <p class="mt-12">{post.publishedAt.toLocaleDateString()}</p>
-        <h1 class="font-bold text-blue-600"> {post.title} </h1>
+        <h1 class="font-bold text-blue-600">{post.title}</h1>
         <div>
           {post.content}
         </div>

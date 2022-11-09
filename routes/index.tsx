@@ -6,8 +6,8 @@ const post: Post = {
   title: "Hello World",
   publishedAt: new Date(),
   snippet: "test",
-  content: "le contenu"
-}
+  content: "le contenu",
+};
 
 export default function Home() {
   return (

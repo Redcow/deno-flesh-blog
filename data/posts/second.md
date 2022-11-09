@@ -9,5 +9,5 @@ snippet: this is the second post
 table
 
 | Table | Column |
-| ----- | ----- |
-| one | two |
+| ----- | ------ |
+| one   | two    |
